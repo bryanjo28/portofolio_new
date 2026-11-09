@@ -98,6 +98,13 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+.btn--outline-light.btn--animata:hover,
+.btn--outline-light.btn--animata:focus-visible {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(115deg, #326cf1 0%, #524ee7 58%, #7650e8 100%);
+  box-shadow: 0 10px 28px rgba(53, 86, 228, 0.25);
+}
+
 /* ---------- Navbar ---------- */
 .navbar {
   position: fixed;
@@ -1228,9 +1235,9 @@
   padding: clamp(40px, 6vw, 72px);
   border-radius: 28px;
   background:
-    radial-gradient(70% 90% at 88% 0%, rgba(48, 91, 220, 0.34), transparent 60%),
-    radial-gradient(60% 80% at 0% 100%, rgba(20, 49, 132, 0.48), transparent 60%),
-    var(--bg-ink);
+    radial-gradient(70% 90% at 88% 0%, rgba(48, 91, 220, 0.45), transparent 62%),
+    radial-gradient(60% 80% at 0% 100%, rgba(26, 68, 210, 0.55), transparent 62%),
+    linear-gradient(165deg, #0a1430 0%, #12309c 100%);
   color: #fff;
 }
 
