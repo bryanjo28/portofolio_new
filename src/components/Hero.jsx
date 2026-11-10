@@ -44,7 +44,7 @@ export default function Hero() {
       <div className="container hero__inner">
         <div className="hero__head">
           <p className="hero__pill"><span className="pill__dot" aria-hidden="true" />{profile.availability}</p>
-          <h1 className="hero__title">Aplikasi &amp; otomasi.<br /><span className="hero__title-mark">Untuk bisnis Anda.</span></h1>
+          <h1 className="hero__title hero__title--animated"><span className="hero__title-line"><span className="hero__word" style={{ '--word-delay': '80ms' }}>Aplikasi</span>{' '}<span className="hero__word" style={{ '--word-delay': '180ms' }}>&amp;</span>{' '}<span className="hero__word" style={{ '--word-delay': '280ms' }}>otomasi.</span></span><br /><span className="hero__title-mark hero__highlight"><span className="hero__highlight-text">Untuk bisnis Anda.</span></span></h1>
           <p className="hero__lead">Saya membantu membuat aplikasi web, menghubungkan sistem, dan mengotomatiskan pekerjaan rutin agar bisnis Anda berjalan lebih mudah.</p>
           <div className="hero__actions"><a href="#proyek" className="btn btn--light btn--animata"><span>Lihat proyek</span><span className="btn__arrow" aria-hidden="true"><span className="btn__arrow-track"><ArrowRight size={17} /><ArrowRight size={17} /></span></span></a><a href="#kontak" className="btn btn--ghost-dark">Mulai diskusi</a></div>
           <p className="hero__meta"><MapPin size={15} /> {profile.location}<span className="hero__meta-sep" aria-hidden="true" />{profile.role}</p>

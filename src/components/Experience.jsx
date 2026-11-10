@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { BotMessageSquare, Gamepad2, PanelsTopLeft, Zap } from 'lucide-react'
 import { solutions } from '../data/portfolio'
+import AnimatedHeading from './AnimatedHeading'
 
 const solutionIcons = [Zap, PanelsTopLeft, BotMessageSquare, Gamepad2]
 
@@ -34,7 +35,7 @@ export default function Experience() {
     <section className="solutions-section" id="pengalaman">
       <div className="container solutions__container" ref={timelineRef}>
         <header className="solutions__head">
-          <h2>Apa yang bisa dibantu<br />untuk bisnis Anda?</h2>
+          <AnimatedHeading highlight="untuk bisnis Anda?">Apa yang bisa dibantu<br /></AnimatedHeading>
           <p>Mulai dari pekerjaan rutin hingga pengalaman pelanggan yang lebih menarik.</p>
         </header>
 

@@ -2,6 +2,7 @@ import { projects, projectCategories } from '../data/portfolio'
 import { ArrowRight, ArrowUpRight, Check, Close } from './Icons'
 import { useReveal } from '../hooks/useReveal'
 import { useEffect, useRef, useState } from 'react'
+import AnimatedHeading from './AnimatedHeading'
 
 const categoryId = (category) => category.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 
@@ -54,7 +55,7 @@ export default function Projects() {
       <div className={`container reveal ${visible ? 'is-visible' : ''}`} ref={ref}>
         <div className="section__head">
           <p className="eyebrow">Proyek pilihan</p>
-          <h2 className="section__title">Beberapa hal yang pernah saya bangun</h2>
+          <AnimatedHeading className="section__title" highlight="saya bangun">Beberapa hal yang pernah</AnimatedHeading>
         </div>
 
         <div className="project-tabs-wrap">

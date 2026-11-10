@@ -1,5 +1,6 @@
 import { profile } from '../data/portfolio'
-import { ArrowRight, Mail } from './Icons'
+import { Mail } from './Icons'
+import AnimatedHeading from './AnimatedHeading'
 import { useReveal } from '../hooks/useReveal'
 
 export default function Contact() {
@@ -10,7 +11,7 @@ export default function Contact() {
       <div className={`container reveal ${visible ? 'is-visible' : ''}`} ref={ref}>
         <div className="contact">
           <p className="eyebrow eyebrow--light">Kontak</p>
-          <h2>Punya ide atau proyek yang ingin diwujudkan?</h2>
+          <AnimatedHeading highlight="diwujudkan?">Punya ide atau proyek yang ingin</AnimatedHeading>
           <p className="contact__lead">
             Saya selalu senang mendengar cerita baru. Kirim pesan dan mari kita diskusikan
             langkah berikutnya.
@@ -19,9 +20,6 @@ export default function Contact() {
           <div className="contact__actions">
             <a href={`mailto:${profile.email}`} className="btn btn--light">
               <Mail /> {profile.email}
-            </a>
-            <a href="#proyek" className="btn btn--outline-light btn--animata">
-              <span>Lihat proyek</span><span className="btn__arrow" aria-hidden="true"><span className="btn__arrow-track"><ArrowRight size={17} /><ArrowRight size={17} /></span></span>
             </a>
           </div>
 

@@ -1,6 +1,7 @@
 import { about } from '../data/portfolio'
 import { Check } from './Icons'
 import { useReveal } from '../hooks/useReveal'
+import AnimatedHeading from './AnimatedHeading'
 
 export default function About() {
   const { ref, visible } = useReveal()
@@ -12,7 +13,7 @@ export default function About() {
 
         <div className="about">
           <div className="about__main">
-            <h2 className="section__title">{about.title}</h2>
+            <AnimatedHeading className="section__title">{about.title}</AnimatedHeading>
 
             <div className="about__text">
               {about.paragraphs.map((paragraph) => (

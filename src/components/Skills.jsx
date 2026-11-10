@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
+import AnimatedHeading from './AnimatedHeading'
 import { Code2, Database as DatabaseIcon, GitBranch, Server, Workflow } from 'lucide-react'
 import githubIcon from '../assets/techstack/transparent/github.png'
 import nodeIcon from '../assets/techstack/transparent/nodeJS.png'
@@ -9,48 +10,63 @@ import reactIcon from '../assets/techstack/transparent/reactJS.png'
 const tech = [
   { name: 'Node.js', src: nodeIcon },
   { name: 'React', src: reactIcon },
-  { name: 'Database', src: databaseIcon },
+  { name: 'PostgreSQL', src: databaseIcon },
   { name: 'GitHub', src: githubIcon },
 ]
 
 function OrbitingTech() {
-  const [angle, setAngle] = useState(0)
+  const orbitRef = useRef(null)
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const items = orbitRef.current.querySelectorAll('.orbit-item--3d')
     let frame
     let previousTime
+    let angle = 0
+    const positionItems = () => items.forEach((item, index) => {
+      const radians = angle + index * (2 * Math.PI / tech.length)
+      const x = 37 * Math.cos(radians)
+      const y = 18 * Math.sin(radians)
+      const tilt = -30 * Math.PI / 180
+      const depth = (Math.sin(radians) + 1) / 2
+      item.style.left = `${50 + x * Math.cos(tilt) - y * Math.sin(tilt)}%`
+      item.style.top = `${50 + x * Math.sin(tilt) + y * Math.cos(tilt)}%`
+      item.style.zIndex = Math.sin(radians) >= 0 ? 4 : 1
+      item.style.setProperty('--depth-scale', 0.78 + depth * 0.4)
+      item.style.setProperty('--depth-opacity', 0.5 + depth * 0.5)
+    })
     const animate = (time) => {
-      if (previousTime !== undefined) setAngle((current) => (current + ((time - previousTime) / 25000) * 360) % 360)
+      if (previousTime !== undefined) angle = (angle + Math.min(time - previousTime, 64) / 26000 * 2 * Math.PI) % (2 * Math.PI)
       previousTime = time
+      positionItems()
       frame = requestAnimationFrame(animate)
     }
-    frame = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(frame)
+    const updateMotion = () => {
+      cancelAnimationFrame(frame)
+      previousTime = undefined
+      positionItems()
+      if (!motion.matches) frame = requestAnimationFrame(animate)
+    }
+    updateMotion()
+    motion.addEventListener('change', updateMotion)
+    return () => {
+      cancelAnimationFrame(frame)
+      motion.removeEventListener('change', updateMotion)
+    }
   }, [])
 
   return (
-    <div className="skills-orbit skills-orbit--3d" aria-label="Node.js, React, Database, dan GitHub mengorbit B.J.">
+    <div ref={orbitRef} className="skills-orbit skills-orbit--3d" role="img" aria-label="Node.js, React, PostgreSQL, dan GitHub mengorbit B.J.">
       <div className="orbit orbit--outer" />
       <div className="orbit orbit--inner" />
       <div className="orbit-center orbit-center--float"><span>B.J</span><small>TECH STACK</small></div>
-      {tech.map((item, index) => {
-        const radians = ((angle + index * (360 / tech.length)) * Math.PI) / 180
-        const x = 39 * Math.cos(radians)
-        const y = 23 * Math.sin(radians)
-        const tilt = (-30 * Math.PI) / 180
-        const xTilted = x * Math.cos(tilt) - y * Math.sin(tilt)
-        const yTilted = x * Math.sin(tilt) + y * Math.cos(tilt)
-        const depth = (Math.sin(radians) + 1) / 2
-
-        return (
-          <div className="orbit-item orbit-item--3d" key={item.name} style={{ left: `${50 + xTilted}%`, top: `${50 + yTilted}%`, zIndex: Math.round(1 + depth * 4) }}>
-            <span className="orbit-item__bubble" style={{ '--depth-scale': 0.86 + depth * 0.28, '--depth-opacity': 0.68 + depth * 0.32 }}>
+      {tech.map((item) => (
+          <div className="orbit-item orbit-item--3d" key={item.name}>
+            <span className="orbit-item__bubble">
               <img src={item.src} alt="" /><small>{item.name}</small>
             </span>
           </div>
-        )
-      })}
+      ))}
     </div>
   )
 }
@@ -80,7 +96,7 @@ export default function Skills() {
         <div className="skills-layout skills-layout--split">
           <div className="skills-copy">
             <p className="eyebrow">Keahlian</p>
-            <h2 className="section__title">Teknologi yang saya gunakan</h2>
+            <AnimatedHeading className="section__title" highlight="saya gunakan">Teknologi yang</AnimatedHeading>
             <p className="section__lead">Saya mengembangkan aplikasi secara end-to-end dengan memanfaatkan berbagai teknologi modern. Mulai dari merancang antarmuka pengguna, membangun sistem backend, mengelola database, hingga mengintegrasikan berbagai layanan untuk menciptakan aplikasi yang fungsional, efisien, dan scalable.</p>
             <div className="skills-description-list">
               {descriptions.map((item) => {
