@@ -2,18 +2,16 @@ import { useEffect, useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
 import AnimatedHeading from './AnimatedHeading'
 import { Code2, Database as DatabaseIcon, GitBranch, Server, Workflow } from 'lucide-react'
-import githubIcon from '../assets/techstack/transparent/github.png'
-import nodeIcon from '../assets/techstack/transparent/nodeJS.png'
-import databaseIcon from '../assets/techstack/transparent/postgre.png'
-import reactIcon from '../assets/techstack/transparent/reactJS.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faNodeJs, faReact, faPostgresql, faOpenai, faPython } from '@fortawesome/free-brands-svg-icons'
 
 const tech = [
-  { name: 'Node.js', src: nodeIcon },
-  { name: 'React', src: reactIcon },
-  { name: 'PostgreSQL', src: databaseIcon },
-  { name: 'GitHub', src: githubIcon },
+  { name: 'Node.js', icon: faNodeJs, color: '#78c85a' },
+  { name: 'React', icon: faReact, color: '#61dafb' },
+  { name: 'PostgreSQL', icon: faPostgresql, color: '#68b5e8' },
+  { name: 'OpenAI', icon: faOpenai, color: '#7ee7c1' },
+  { name: 'Python', icon: faPython, color: '#ffd166' },
 ]
-
 function OrbitingTech() {
   const orbitRef = useRef(null)
 
@@ -56,14 +54,14 @@ function OrbitingTech() {
   }, [])
 
   return (
-    <div ref={orbitRef} className="skills-orbit skills-orbit--3d" role="img" aria-label="Node.js, React, PostgreSQL, dan GitHub mengorbit B.J.">
+    <div ref={orbitRef} className="skills-orbit skills-orbit--3d" role="img" aria-label="Node.js, React, PostgreSQL, OpenAI, dan Python mengorbit B.J.">
       <div className="orbit orbit--outer" />
       <div className="orbit orbit--inner" />
       <div className="orbit-center orbit-center--float"><span>B.J</span><small>TECH STACK</small></div>
       {tech.map((item) => (
-          <div className="orbit-item orbit-item--3d" key={item.name}>
+          <div className="orbit-item orbit-item--3d" key={item.name} style={{ '--orbit-color': item.color }}>
             <span className="orbit-item__bubble">
-              <img src={item.src} alt="" /><small>{item.name}</small>
+              <span className="orbit-brand-bubble"><FontAwesomeIcon icon={item.icon} aria-hidden="true" /></span><small>{item.name}</small>
             </span>
           </div>
       ))}

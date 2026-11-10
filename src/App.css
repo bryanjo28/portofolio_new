@@ -2089,3 +2089,8 @@
   .project:hover .project__arrow,.project:focus-visible .project__arrow,
   .project:hover .project__arrow svg,.project:focus-visible .project__arrow svg { transform:none; }
 }
+
+/* Font Awesome brand bubbles in the 3D tech orbit. */
+.orbit-item--3d .orbit-brand-bubble { display:grid; place-items:center; flex-shrink:0; width:54px; height:54px; border-radius:50%; color:var(--orbit-color); border:1px solid color-mix(in srgb,var(--orbit-color) 45%,transparent); background:radial-gradient(circle at 30% 20%,color-mix(in srgb,var(--orbit-color) 22%,transparent),transparent 75%),#181528; box-shadow:inset 0 1px 8px color-mix(in srgb,var(--orbit-color) 18%,transparent),0 0 22px color-mix(in srgb,var(--orbit-color) 25%,transparent); }
+.orbit-brand-bubble svg { width:28px; height:28px; filter:drop-shadow(0 0 6px color-mix(in srgb,var(--orbit-color) 60%,transparent)); }
+@media(max-width:560px) { .orbit-item--3d .orbit-brand-bubble { width:42px; height:42px; }.orbit-brand-bubble svg { width:23px; height:23px; } }
