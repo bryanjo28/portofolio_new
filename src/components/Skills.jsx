@@ -16,23 +16,32 @@ function OrbitingTech() {
   const orbitRef = useRef(null)
 
   useEffect(() => {
+    const node = orbitRef.current
+    if (!node) return
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const items = orbitRef.current.querySelectorAll('.orbit-item--3d')
+    const items = Array.from(node.querySelectorAll('.orbit-item--3d'))
     let frame
     let previousTime
     let angle = 0
-    const positionItems = () => items.forEach((item, index) => {
+    let size = node.clientWidth || 0
+    const tilt = -30 * Math.PI / 180
+    // Move the icons with a transform (composited) instead of left/top, which
+    // reflowed the layout every frame and made the whole orbit jitter.
+    // Each icon gets its own stacking context, so z-index works even though
+    // they no longer share one.
+    const placeItem = (item, index) => {
       const radians = angle + index * (2 * Math.PI / tech.length)
-      const x = 37 * Math.cos(radians)
-      const y = 18 * Math.sin(radians)
-      const tilt = -30 * Math.PI / 180
+      const x = size * 0.37 * Math.cos(radians)
+      const y = size * 0.18 * Math.sin(radians)
       const depth = (Math.sin(radians) + 1) / 2
-      item.style.left = `${50 + x * Math.cos(tilt) - y * Math.sin(tilt)}%`
-      item.style.top = `${50 + x * Math.sin(tilt) + y * Math.cos(tilt)}%`
+      const left = x * Math.cos(tilt) - y * Math.sin(tilt)
+      const top = x * Math.sin(tilt) + y * Math.cos(tilt)
+      item.style.transform = `translate3d(${left.toFixed(2)}px, ${top.toFixed(2)}px, 0)`
       item.style.zIndex = Math.sin(radians) >= 0 ? 4 : 1
-      item.style.setProperty('--depth-scale', 0.78 + depth * 0.4)
-      item.style.setProperty('--depth-opacity', 0.5 + depth * 0.5)
-    })
+      item.style.setProperty('--depth-scale', (0.78 + depth * 0.4).toFixed(3))
+      item.style.setProperty('--depth-opacity', (0.5 + depth * 0.5).toFixed(3))
+    }
+    const positionItems = () => items.forEach(placeItem)
     const animate = (time) => {
       if (previousTime !== undefined) angle = (angle + Math.min(time - previousTime, 64) / 26000 * 2 * Math.PI) % (2 * Math.PI)
       previousTime = time
@@ -42,14 +51,17 @@ function OrbitingTech() {
     const updateMotion = () => {
       cancelAnimationFrame(frame)
       previousTime = undefined
+      size = node.clientWidth || size
       positionItems()
       if (!motion.matches) frame = requestAnimationFrame(animate)
     }
     updateMotion()
     motion.addEventListener('change', updateMotion)
+    window.addEventListener('resize', updateMotion)
     return () => {
       cancelAnimationFrame(frame)
       motion.removeEventListener('change', updateMotion)
+      window.removeEventListener('resize', updateMotion)
     }
   }, [])
 
