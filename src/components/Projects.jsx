@@ -187,6 +187,9 @@ export default function Projects() {
 
               <div className="project-dialog__cta">
                 <p>{activeProject.closing}</p>
+                {activeProject.website && (
+                  <a href={activeProject.website} target="_blank" rel="noopener noreferrer" className="btn btn--animata project-dialog__button"><span>Kunjungi website</span><ArrowUpRight size={17} /></a>
+                )}
                 <a href="#kontak" className="btn btn--animata project-dialog__button" onClick={() => setActiveProject(null)}><span>Diskusikan kebutuhan Anda</span><span className="btn__arrow" aria-hidden="true"><span className="btn__arrow-track"><ArrowRight size={17} /><ArrowRight size={17} /></span></span></a>
               </div>
             </div>

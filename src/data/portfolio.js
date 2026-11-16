@@ -7,6 +7,9 @@ import dundeeCover from '../assets/dundee/dundee_main.png'
 import dundeeAdmin from '../assets/dundee/dundee_admin.png'
 import dundeeReports from '../assets/dundee/laporan.png'
 import dundeeStock from '../assets/dundee/stock.png'
+import dundeeRestoCover from '../assets/dundee_porto/dundee-cover.png'
+import dundeeRestoHero from '../assets/dundee_porto/hero.png'
+import dundeeRestoMenu from '../assets/dundee_porto/makanan.png'
 import chatbotCover from '../assets/ai_chatbot/test_ai.png'
 import chatbotThreads from '../assets/ai_chatbot/ai_chatbot2.png'
 import chatbotAnalytics from '../assets/ai_chatbot/analitik.png'
@@ -66,7 +69,7 @@ export const skills = [
 
 export const projectCategories = [
   'Otomasi',
-  'Sistem Operasional Bisnis',
+  'Website & Sistem Bisnis',
   'Asisten AI & Chatbot',
   'Gamification',
 ]
@@ -102,7 +105,7 @@ export const projects = [
   },
   {
     title: 'Klei-Rent',
-    category: 'Sistem Operasional Bisnis',
+    category: 'Website & Sistem Bisnis',
     description: 'Katalog penyewaan gaun yang memudahkan pelanggan menjelajah koleksi dan admin mengelola operasional.',
     detail: 'Klei-Rent menyatukan pengalaman katalog yang nyaman bagi pelanggan dengan dashboard untuk memperbarui koleksi dan menangani kebutuhan operasional.',
     audience: 'Pelanggan yang mencari gaun untuk acara spesial dan tim Klei-Rent yang mengelola katalog penyewaan.',
@@ -116,8 +119,8 @@ export const projects = [
     accent: 'purple',
   },
   {
-    title: 'Dundee',
-    category: 'Sistem Operasional Bisnis',
+    title: 'Dundee Finance Dashboard',
+    category: 'Website & Sistem Bisnis',
     description: 'Dashboard keuangan dan operasional untuk membantu restoran memahami kondisi bisnisnya.',
     detail: 'Dundee menyatukan informasi penjualan, pengeluaran, laporan, dan stok agar pemilik usaha dapat mengambil keputusan dengan gambaran yang lebih utuh.',
     audience: 'Pemilik dan tim operasional restoran yang perlu memantau keuangan serta persediaan.',
@@ -129,6 +132,22 @@ export const projects = [
     galleryLabels: ['Dashboard finance', 'Laporan', 'Stok'],
     tags: ['Finance management', 'Operational dashboard'],
     accent: 'green',
+  },
+  {
+    title: 'Dundee Resto Portofolio',
+    category: 'Website & Sistem Bisnis',
+    description: 'Website restoran yang memperkenalkan Dundee melalui sajian menu, cerita brand, dan informasi lokasi.',
+    detail: 'Dundee Resto menghadirkan identitas restoran dalam website responsif dengan tampilan menu yang menggugah selera dan navigasi yang mudah dijelajahi.',
+    audience: 'Calon pelanggan yang ingin mengenal Dundee dan melihat pilihan menu sebelum berkunjung.',
+    helps: 'Menyajikan pilihan makanan, cerita restoran, lokasi, dan akses kontak dalam satu website.',
+    example: 'Pelanggan menjelajahi menu melalui ponsel, melihat informasi lokasi, lalu menghubungi restoran melalui tautan yang tersedia.',
+    closing: 'Dari melihat menu sampai mengenal restoran, semuanya mudah dijangkau.',
+    image: dundeeRestoCover,
+    gallery: [dundeeRestoHero, dundeeRestoMenu],
+    galleryLabels: ['Halaman utama', 'Pilihan menu'],
+    website: 'https://dundee-resto.biz.id/',
+    tags: ['Restaurant website', 'Menu showcase', 'Responsive design'],
+    accent: 'navy',
   },
   {
     title: 'AI Chatbot',
