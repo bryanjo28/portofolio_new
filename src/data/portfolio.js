@@ -5,6 +5,7 @@ import alurinCover from '../assets/alurin/alurin_main.png'
 import crawlingCover from '../assets/alurin/tools_crawling.png'
 import dundeeCover from '../assets/dundee/dundee_main.png'
 import dundeeAdmin from '../assets/dundee/dundee_admin.png'
+import dundeeKasir from '../assets/dundee/kasir.jpg'
 import dundeeReports from '../assets/dundee/laporan.png'
 import dundeeStock from '../assets/dundee/stock.png'
 import dundeeRestoCover from '../assets/dundee_porto/dundee-cover.png'
@@ -119,18 +120,18 @@ export const projects = [
     accent: 'purple',
   },
   {
-    title: 'Dundee Finance Dashboard',
+    title: 'Dundee Finance & Kasir Dashboard',
     category: 'Website & Sistem Bisnis',
-    description: 'Dashboard keuangan dan operasional untuk membantu restoran memahami kondisi bisnisnya.',
-    detail: 'Dundee menyatukan informasi penjualan, pengeluaran, laporan, dan stok agar pemilik usaha dapat mengambil keputusan dengan gambaran yang lebih utuh.',
-    audience: 'Pemilik dan tim operasional restoran yang perlu memantau keuangan serta persediaan.',
-    helps: 'Merangkum transaksi, performa penjualan, laporan, dan stok dalam satu dashboard yang mudah dipahami.',
-    example: 'Tinjau laporan penjualan dan stok secara berkala untuk mengetahui perubahan performa dan kebutuhan persediaan.',
-    closing: 'Informasi operasional lebih mudah dibaca, keputusan bisnis lebih terarah.',
+    description: 'Kasir dan dashboard keuangan restoran dalam satu sistem yang saling terhubung.',
+    detail: 'Dundee menyatukan transaksi kasir, penjualan, pengeluaran, laporan, dan stok sehingga pemilik usaha melihat kondisi bisnis dengan gambaran yang utuh.',
+    audience: 'Pemilik dan tim operasional restoran yang melayani pesanan sekaligus memantau keuangan serta persediaan.',
+    helps: 'Mencatat pesanan di kasir, lalu merangkum transaksi, penjualan, laporan, dan stok dalam satu dashboard yang mudah dibaca.',
+    example: 'Kasir mencatat pesanan sepanjang hari, lalu laporan penjualan dan stok ditinjau berkala untuk melihat performa dan kebutuhan persediaan.',
+    closing: 'Dari transaksi kasir sampai laporan, semuanya ada di satu tempat.',
     image: dundeeCover,
-    gallery: [dundeeAdmin, dundeeReports, dundeeStock],
-    galleryLabels: ['Dashboard finance', 'Laporan', 'Stok'],
-    tags: ['Finance management', 'Operational dashboard'],
+    gallery: [dundeeKasir, dundeeAdmin, dundeeReports, dundeeStock],
+    galleryLabels: ['Kasir (POS)', 'Dashboard finance', 'Laporan', 'Stok'],
+    tags: ['Kasir (POS)', 'Finance management', 'Operational dashboard'],
     accent: 'green',
   },
   {
