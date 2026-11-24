@@ -1,22 +1,22 @@
-import kleiRentCover from '../assets/klei_rent/klei-rent_cover.png'
-import kleiDesktop from '../assets/klei_rent/desktop.png'
-import kleiAdmin from '../assets/klei_rent/admin.png'
-import alurinCover from '../assets/alurin/alurin_main.png'
-import crawlingCover from '../assets/alurin/tools_crawling.png'
-import dundeeCover from '../assets/dundee/dundee_main.png'
-import dundeeAdmin from '../assets/dundee/dundee_admin.png'
+import kleiRentCover from '../assets/klei_rent/klei-rent_cover.webp'
+import kleiDesktop from '../assets/klei_rent/desktop.webp'
+import kleiAdmin from '../assets/klei_rent/admin.webp'
+import alurinCover from '../assets/alurin/alurin_main.webp'
+import crawlingCover from '../assets/alurin/tools_crawling.webp'
+import dundeeCover from '../assets/dundee/dundee_main.webp'
+import dundeeAdmin from '../assets/dundee/dundee_admin.webp'
 import dundeeKasir from '../assets/dundee/kasir.jpg'
-import dundeeReports from '../assets/dundee/laporan.png'
-import dundeeStock from '../assets/dundee/stock.png'
-import dundeeRestoCover from '../assets/dundee_porto/dundee-cover.png'
-import dundeeRestoHero from '../assets/dundee_porto/hero.png'
-import dundeeRestoMenu from '../assets/dundee_porto/makanan.png'
-import chatbotCover from '../assets/ai_chatbot/test_ai.png'
-import chatbotThreads from '../assets/ai_chatbot/ai_chatbot2.png'
-import chatbotAnalytics from '../assets/ai_chatbot/analitik.png'
-import chatbotVideo from '../assets/ai_chatbot/video_generation.png'
-import chatbotResult from '../assets/ai_chatbot/hasil.png'
-import gameCover from '../assets/interactive_web/interactive_test.png'
+import dundeeReports from '../assets/dundee/laporan.webp'
+import dundeeStock from '../assets/dundee/stock.webp'
+import dundeeRestoCover from '../assets/dundee_porto/dundee-cover.webp'
+import dundeeRestoHero from '../assets/dundee_porto/hero.webp'
+import dundeeRestoMenu from '../assets/dundee_porto/makanan.webp'
+import chatbotCover from '../assets/ai_chatbot/test_ai.webp'
+import chatbotThreads from '../assets/ai_chatbot/ai_chatbot2.webp'
+import chatbotAnalytics from '../assets/ai_chatbot/analitik.webp'
+import chatbotVideo from '../assets/ai_chatbot/video_generation.webp'
+import chatbotResult from '../assets/ai_chatbot/hasil.webp'
+import gameCover from '../assets/interactive_web/interactive_test.webp'
 
 export const profile = {
   name: 'B.J.',
@@ -28,7 +28,7 @@ export const profile = {
   availability: 'Terbuka untuk proyek freelance & full-time',
   socials: [
     // { label: 'GitHub', href: 'https://github.com/' },
-    { label: 'LinkedIn', href: 'www.linkedin.com/in/bryan-tjipto-665512172' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/bryan-tjipto-665512172' },
     { label: 'Instagram', href: 'https://www.instagram.com/bryanjon28/' },
   ],
   stats: [
@@ -209,14 +209,16 @@ export const solutions = [
 ]
 
 export const navLinks = [
+  { label: 'Tentang', href: '#tentang' },
   { label: 'Keahlian', href: '#keahlian' },
   { label: 'Proyek', href: '#proyek' },
-  { label: 'Kontak', href: '#kontak' },
+  { label: 'Layanan', href: '#pengalaman' },
 ]
 
 export const footerLinks = [
   { label: 'Tentang', href: '#tentang' },
   { label: 'Keahlian', href: '#keahlian' },
   { label: 'Proyek', href: '#proyek' },
+  { label: 'Layanan', href: '#pengalaman' },
   { label: 'Kontak', href: '#kontak' },
 ]

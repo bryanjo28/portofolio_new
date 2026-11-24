@@ -1,4 +1,4 @@
-import { navLinks, profile } from '../data/portfolio'
+import { footerLinks, profile } from '../data/portfolio'
 
 const currentYear = new Date().getFullYear()
 
@@ -15,7 +15,7 @@ export default function Footer() {
 
         <nav aria-label="Navigasi footer">
           <ul className="footer__links">
-            {navLinks.map((link) => (
+            {footerLinks.map((link) => (
               <li key={link.href}>
                 <a href={link.href}>{link.label}</a>
               </li>

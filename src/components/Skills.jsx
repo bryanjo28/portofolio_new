@@ -12,6 +12,7 @@ const tech = [
   { name: 'OpenAI', icon: faOpenai, color: '#7ee7c1' },
   { name: 'Python', icon: faPython, color: '#ffd166' },
 ]
+
 function OrbitingTech() {
   const orbitRef = useRef(null)
 
@@ -24,13 +25,11 @@ function OrbitingTech() {
     let previousTime
     let angle = 0
     let size = node.clientWidth || 0
-    const tilt = -30 * Math.PI / 180
-    // Move the icons with a transform (composited) instead of left/top, which
-    // reflowed the layout every frame and made the whole orbit jitter.
-    // Each icon gets its own stacking context, so z-index works even though
-    // they no longer share one.
+    let isVisible = true
+    const tilt = (-30 * Math.PI) / 180
+
     const placeItem = (item, index) => {
-      const radians = angle + index * (2 * Math.PI / tech.length)
+      const radians = angle + index * ((2 * Math.PI) / tech.length)
       const x = size * 0.37 * Math.cos(radians)
       const y = size * 0.18 * Math.sin(radians)
       const depth = (Math.sin(radians) + 1) / 2
@@ -41,41 +40,104 @@ function OrbitingTech() {
       item.style.setProperty('--depth-scale', (0.78 + depth * 0.4).toFixed(3))
       item.style.setProperty('--depth-opacity', (0.5 + depth * 0.5).toFixed(3))
     }
+
     const positionItems = () => items.forEach(placeItem)
+
     const animate = (time) => {
-      if (previousTime !== undefined) angle = (angle + Math.min(time - previousTime, 64) / 26000 * 2 * Math.PI) % (2 * Math.PI)
+      if (previousTime !== undefined) {
+        angle = (angle + (Math.min(time - previousTime, 64) / 26000) * 2 * Math.PI) % (2 * Math.PI)
+      }
       previousTime = time
       positionItems()
       frame = requestAnimationFrame(animate)
     }
-    const updateMotion = () => {
+
+    const stopLoop = () => {
       cancelAnimationFrame(frame)
+      frame = undefined
       previousTime = undefined
+    }
+
+    const startLoop = () => {
+      if (frame !== undefined || motion.matches || !isVisible) return
+      previousTime = undefined
+      frame = requestAnimationFrame(animate)
+    }
+
+    const updateMotion = () => {
+      stopLoop()
       size = node.clientWidth || size
       positionItems()
-      if (!motion.matches) frame = requestAnimationFrame(animate)
+      startLoop()
     }
+
+    const onVisibilityChange = (event) => {
+      isVisible = !event.skipped
+      if (event.skipped) {
+        stopLoop()
+      } else {
+        size = node.clientWidth || size
+        startLoop()
+      }
+    }
+
     updateMotion()
     motion.addEventListener('change', updateMotion)
     window.addEventListener('resize', updateMotion)
+
+    let observer
+    const supportsContentVisibility = 'contentVisibility' in document.documentElement.style
+    if (supportsContentVisibility) {
+      node.addEventListener('contentvisibilityautostatechange', onVisibilityChange)
+    } else if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          isVisible = entry.isIntersecting
+          if (isVisible) startLoop()
+          else stopLoop()
+        },
+        { rootMargin: '200px' },
+      )
+      observer.observe(node)
+    }
+
     return () => {
-      cancelAnimationFrame(frame)
+      stopLoop()
       motion.removeEventListener('change', updateMotion)
       window.removeEventListener('resize', updateMotion)
+      if (supportsContentVisibility) {
+        node.removeEventListener('contentvisibilityautostatechange', onVisibilityChange)
+      }
+      observer?.disconnect()
     }
   }, [])
 
   return (
-    <div ref={orbitRef} className="skills-orbit skills-orbit--3d" role="img" aria-label="Node.js, React, PostgreSQL, OpenAI, dan Python mengorbit B.J.">
+    <div
+      ref={orbitRef}
+      className="skills-orbit skills-orbit--3d"
+      role="img"
+      aria-label="Node.js, React, PostgreSQL, OpenAI, dan Python mengorbit B.J."
+    >
       <div className="orbit orbit--outer" />
       <div className="orbit orbit--inner" />
-      <div className="orbit-center orbit-center--float"><span>B.J</span><small>TECH STACK</small></div>
+      <div className="orbit-center orbit-center--float">
+        <span>B.J</span>
+        <small>TECH STACK</small>
+      </div>
       {tech.map((item) => (
-          <div className="orbit-item orbit-item--3d" key={item.name} style={{ '--orbit-color': item.color }}>
-            <span className="orbit-item__bubble">
-              <span className="orbit-brand-bubble"><FontAwesomeIcon icon={item.icon} aria-hidden="true" /></span><small>{item.name}</small>
+        <div
+          className="orbit-item orbit-item--3d"
+          key={item.name}
+          style={{ '--orbit-color': item.color }}
+        >
+          <span className="orbit-item__bubble">
+            <span className="orbit-brand-bubble">
+              <FontAwesomeIcon icon={item.icon} aria-hidden="true" />
             </span>
-          </div>
+            <small>{item.name}</small>
+          </span>
+        </div>
       ))}
     </div>
   )
@@ -85,7 +147,11 @@ const descriptions = [
   { title: 'Frontend', tools: 'React.js · Vite', detail: 'Antarmuka web yang interaktif.' },
   { title: 'Backend', tools: 'Node.js · Express.js', detail: 'Logika aplikasi dan integrasi API.' },
   { title: 'Database', tools: 'PostgreSQL · Supabase · SQL', detail: 'Penyimpanan dan pengelolaan data.' },
-   { title: 'API & Third-Party Integration ', tools: 'REST API · External Services · Cloud Services', detail: 'Mengintegrasikan aplikasi dengan berbagai layanan eksternal.' },
+  {
+    title: 'API & Third-Party Integration',
+    tools: 'REST API · External Services · Cloud Services',
+    detail: 'Mengintegrasikan aplikasi dengan berbagai layanan eksternal.',
+  },
   { title: 'Version control', tools: 'Git · GitHub', detail: 'Kolaborasi kode dan pengelolaan versi.' },
 ]
 
@@ -106,17 +172,28 @@ export default function Skills() {
         <div className="skills-layout skills-layout--split">
           <div className="skills-copy">
             <p className="eyebrow">Keahlian</p>
-            <AnimatedHeading className="section__title" highlight="saya gunakan">Teknologi yang</AnimatedHeading>
-            <p className="section__lead">Saya mengembangkan aplikasi secara end-to-end dengan memanfaatkan berbagai teknologi modern. Mulai dari merancang antarmuka pengguna, membangun sistem backend, mengelola database, hingga mengintegrasikan berbagai layanan untuk menciptakan aplikasi yang fungsional, efisien, dan scalable.</p>
+            <AnimatedHeading className="section__title" highlight="saya gunakan">
+              Teknologi yang
+            </AnimatedHeading>
+            <p className="section__lead">
+              Saya mengembangkan aplikasi secara end-to-end dengan memanfaatkan berbagai teknologi
+              modern. Mulai dari merancang antarmuka pengguna, membangun sistem backend, mengelola
+              database, hingga mengintegrasikan berbagai layanan untuk menciptakan aplikasi yang
+              fungsional, efisien, dan scalable.
+            </p>
             <div className="skills-description-list">
               {descriptions.map((item) => {
-                const Icon = skillIcons[item.title.trim()]
-                const tools = item.tools.replaceAll('Â·', '·')
+                const Icon = skillIcons[item.title]
                 return (
                   <article className="skills-description" key={item.title}>
                     <div className="skills-description__heading">
-                      <span className="skills-description__icon">{Icon && <Icon size={18} strokeWidth={1.8} />}</span>
-                      <div><h3>{item.title.trim()}</h3><p>{tools}</p></div>
+                      <span className="skills-description__icon">
+                        {Icon && <Icon size={18} strokeWidth={1.8} aria-hidden="true" />}
+                      </span>
+                      <div>
+                        <h3>{item.title}</h3>
+                        <p>{item.tools}</p>
+                      </div>
                     </div>
                     <small className="skills-description__detail">{item.detail}</small>
                   </article>

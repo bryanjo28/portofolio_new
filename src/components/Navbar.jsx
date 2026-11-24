@@ -5,7 +5,6 @@ import { ArrowRight, Close, Menu } from './Icons'
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [lightMode, setLightMode] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -15,8 +14,8 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    document.documentElement.dataset.theme = lightMode ? 'light' : 'dark'
-  }, [lightMode])
+    document.documentElement.dataset.theme = 'dark'
+  }, [])
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''

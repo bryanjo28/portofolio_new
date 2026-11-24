@@ -25,7 +25,11 @@ export default function Stats() {
             <h2><Counter value={featured.value} /> <span>{featured.label}</span></h2>
             <p className="stats-card__description">Membangun produk digital dari ide sampai siap digunakan.</p>
             <div className="stats-card__stack" aria-label="Teknologi yang sering digunakan">
-              {/* {stackIcons.map((icon) => <span className="stats-card__stack-icon" key={icon.name}><img src={icon.src} alt={icon.name} /></span>)} */}
+              {stackIcons.map((icon) => (
+                <span className="stats-card__stack-icon" key={icon.name} title={icon.name}>
+                  <img src={icon.src} alt={icon.name} loading="lazy" decoding="async" />
+                </span>
+              ))}
               <span className="stats-card__stack-label">Tools yang sering dipakai</span>
             </div>
           </article>

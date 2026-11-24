@@ -13,8 +13,11 @@ import CircuitBackdrop from './components/CircuitBackdrop'
 function App() {
   return (
     <>
+      <a href="#konten-utama" className="skip-link">
+        Lewati ke konten utama
+      </a>
       <Navbar />
-      <main>
+      <main id="konten-utama">
         <div className="band band--hero">
           <CircuitBackdrop />
           <Hero />
